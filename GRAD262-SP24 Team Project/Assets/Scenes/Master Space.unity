@@ -153,6 +153,37 @@ Transform:
   m_Father: {fileID: 1443833712}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &733547330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 733547331}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &733547331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733547330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1584041223}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &774320388
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,6 +356,7 @@ GameObject:
   - component: {fileID: 1443833715}
   - component: {fileID: 1443833714}
   - component: {fileID: 1443833713}
+  - component: {fileID: 1443833716}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -373,7 +405,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.6
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -393,12 +425,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardThrustPower: 1600
   yawSpeed: 1200
-  pitchSpeed: 700
+  pitchSpeed: -700
   rollSpeed: 10000
   deadZoneRadius: 0.15
   clampRotation: 0
   rotationMin: {x: -10, y: -10, z: -10}
   rotationMax: {x: 10, y: 10, z: 10}
+--- !u!114 &1443833716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443833711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8391f2a8e41e05249a365e7864ba41a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1584041222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584041223}
+  - component: {fileID: 1584041224}
+  m_Layer: 0
+  m_Name: Asteroid Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1584041223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584041222}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 733547331}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1584041224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584041222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 856ec5b281bd14c45ae2854b2a75aca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnCount: 40
+  spawnRangeMax: {x: 512, y: 512, z: 512}
+  spawnRangeMin: {x: -512, y: -512, z: -512}
+  scaleMax: 80
+  scaleMin: 20
+  prefabs:
+  - {fileID: 1281155567026345128, guid: eb6e048f977eb8f49b5ee0478d1192f6, type: 3}
+  - {fileID: 5377491066873979648, guid: ed6ec754611870d49b24d1c1c80d6cea, type: 3}
+  - {fileID: 3529744038003158217, guid: 0b87c806f0606db488e06295488c227b, type: 3}
 --- !u!1 &1673581209
 GameObject:
   m_ObjectHideFlags: 0
