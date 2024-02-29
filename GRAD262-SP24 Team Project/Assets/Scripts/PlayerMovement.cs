@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float pitchSpeed = 1000f;
     public float rollSpeed = 1000f;
     public float deadZoneRadius = 0.15f;
+    public bool clampRotation = true;
     public Vector3 rotationMin = new Vector3(-10, -10, -10);
     public Vector3 rotationMax = new Vector3(10, 10, 10);
 
@@ -23,7 +24,9 @@ public class PlayerMovement : MonoBehaviour
     {
         GetKeyboardInputs();
         GetMouseInputs();
-        ClampRotation();
+
+        if (clampRotation)
+            ClampRotation();
     }
 
     private float ClampAngle(float angle, float from, float to)
