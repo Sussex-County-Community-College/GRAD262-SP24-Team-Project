@@ -164,5 +164,6 @@ public class PlayerMovement : MonoBehaviour
         if (!Mathf.Approximately(0f, vector.magnitude))
             _rigidBody.AddTorque(vector * Time.fixedDeltaTime);
     }
+
 }
 

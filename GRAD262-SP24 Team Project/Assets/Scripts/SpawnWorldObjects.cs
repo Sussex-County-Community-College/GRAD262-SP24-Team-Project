@@ -25,8 +25,7 @@ public class SpawnWorldObjects : MonoBehaviour
     [Tooltip("The List of prefabs that can be spawned by this script")]
     public List<GameObject> prefabs;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // for i from =0 to <spawnCount
         for (int i = 0; i < spawnCount; i++)
@@ -42,7 +41,7 @@ public class SpawnWorldObjects : MonoBehaviour
                 );
 
             // Set the position of gObj to pos
-            gObj.transform.position = pos;
+            gObj.transform.localPosition = pos;
 
             // Set the localScale of gObj to be betweeb scaleMin and scaleMax
             gObj.transform.localScale = Vector3.one * Random.Range(scaleMin, scaleMax);
