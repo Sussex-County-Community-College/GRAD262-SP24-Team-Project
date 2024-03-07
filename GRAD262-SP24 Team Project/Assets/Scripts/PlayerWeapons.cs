@@ -8,12 +8,12 @@ public class PlayerWeapons : MonoBehaviour
     public float missileForce = 1000f;
     public GameObject[] shipWeapons;
 
-    private PlayerMovement _playerMovement;
+    private Rigidbody _rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class PlayerWeapons : MonoBehaviour
 
             if (rb)
             {
-                rb.AddForce(transform.forward * missileForce * Time.fixedDeltaTime);
+                rb.AddForce(transform.forward * missileForce  * Time.fixedDeltaTime);
             }
 
             UIManager.Instance.PlayerShotWeapon();
