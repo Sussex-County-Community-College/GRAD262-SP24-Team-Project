@@ -51,8 +51,13 @@ MonoBehaviour:
   scaleMin: 25
   prefabs:
   - {fileID: 1281155567026345128, guid: eb6e048f977eb8f49b5ee0478d1192f6, type: 3}
-  - {fileID: 5377491066873979648, guid: ed6ec754611870d49b24d1c1c80d6cea, type: 3}
+  - {fileID: 2319000700565176193, guid: 40438f21002ae96488d467f6e45c95df, type: 3}
   - {fileID: 3529744038003158217, guid: 0b87c806f0606db488e06295488c227b, type: 3}
+  - {fileID: 4497758733331148227, guid: 78b4587a752662e44a4d4c8f6e772133, type: 3}
+  - {fileID: 3896132824321634848, guid: cc24eceab51dc0243aedf896cdd2026a, type: 3}
+  - {fileID: 6653881202608930680, guid: bfbd17c9162ea414586599c276175809, type: 3}
+  - {fileID: 2623237873410287026, guid: 83e326fc4f606d2448dd47643354424e, type: 3}
+  - {fileID: 6173534935708925286, guid: b09dba1c25babd1438c29d22bde6b34e, type: 3}
 --- !u!114 &-79252471469652980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,4 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69a58ad1f8b43e418dfc23e4f9b2090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingDistanceFromPlayer: 5000
+  endingDistanceFromPlayer: 10000
   force: 10000
