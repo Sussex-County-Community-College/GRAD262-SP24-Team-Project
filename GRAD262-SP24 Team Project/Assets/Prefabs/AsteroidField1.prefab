@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCount: 100
-  spawnRangeMax: {x: 1000, y: 1000, z: 1000}
-  spawnRangeMin: {x: -1000, y: -1000, z: -1000}
+  spawnRangeMax: {x: 500, y: 500, z: 500}
+  spawnRangeMin: {x: -500, y: -500, z: -500}
   scaleMax: 50
   scaleMin: 25
   prefabs:
@@ -70,6 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69a58ad1f8b43e418dfc23e4f9b2090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingDistanceFromPlayer: 5000
+  startingDistanceFromPlayer: 1500
   endingDistanceFromPlayer: 10000
-  force: 10000
+  force: 100

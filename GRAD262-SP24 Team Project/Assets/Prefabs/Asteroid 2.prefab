@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8799295314890400936}
   - component: {fileID: 5672872349294327338}
   - component: {fileID: 7087890654931562104}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: test_asteroid2_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,9 +93,9 @@ GameObject:
   - component: {fileID: 4421182102176037935}
   - component: {fileID: 1620791998718200654}
   - component: {fileID: 3375084057562960352}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Asteroid 2
-  m_TagString: Enemy
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +156,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!1 &7213350262561924007
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 3423773384051065222}
   - component: {fileID: 637968602267237367}
   - component: {fileID: 8769318707900976998}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: test_asteroid2_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1304931845161373675}
   - component: {fileID: 6187453756000459095}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: test_asteroid_LODGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 4526580777938339519}
   - component: {fileID: 1569195342348041393}
   - component: {fileID: 2346819278760721568}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: test_asteroid2_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

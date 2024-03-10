@@ -5,16 +5,8 @@ using UnityEngine;
 public class PlayerWeapons : MonoBehaviour
 {
     public GameObject missilePrefab;
-    public float missileForce = 1000f;
+    public float missileForce = 100000f;
     public GameObject[] shipWeapons;
-
-    private Rigidbody _rb;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -33,6 +25,7 @@ public class PlayerWeapons : MonoBehaviour
 
             if (rb)
             {
+                rb.velocity = GetComponent<Rigidbody>().velocity;
                 rb.AddForce(transform.forward * missileForce  * Time.fixedDeltaTime);
             }
 

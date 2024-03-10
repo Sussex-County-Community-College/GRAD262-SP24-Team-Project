@@ -6,10 +6,12 @@ public class MissileCollisions : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        //if (CompareTag("Asteroid"))
+        if (collision.gameObject.CompareTag("Asteroid"))
         {
             Debug.Log("Missle hit");
             UIManager.Instance.AsteroidBlast();
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
         }
     }
 
