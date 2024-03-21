@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AsteroidManager : Singleton<AsteroidManager>
 {
-    public AsteroidField genericFieldPrefab;
+    public AsteroidField[] fields;
     public float probabilityOfSpawningGenericField = .01f;
 
     private GameObject _player;
@@ -25,11 +25,11 @@ public class AsteroidManager : Singleton<AsteroidManager>
         field.gameObject.transform.position = _player.transform.position + _player.transform.forward * field.startingDistanceFromPlayer;
     }
 
-    private void Update()
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) || Random.Range(0f, 1f) < probabilityOfSpawningGenericField)
+        if (Input.GetKeyDown(KeyCode.G) || Random.Range(0f, 1f) < probabilityOfSpawningGenericField)
         {
-            SpawnField(genericFieldPrefab);
+            SpawnField(fields[Random.Range(0, fields.Length)]);
         }
     }
 }
