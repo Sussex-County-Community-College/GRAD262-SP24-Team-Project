@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: 1
-  elementAmount: 1
+  elementAmount: 10
 --- !u!1 &3896132824321668612
 GameObject:
   m_ObjectHideFlags: 0

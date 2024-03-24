@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Laserable : MonoBehaviour
 {
-   // Assigned integer can be interpreted 
-   // value that can be mined per second.
+    // Assigned integer can be interpreted 
+    // value that can be mined per second.
     public enum LaserableElements
     {
         None = 0,
@@ -16,4 +16,9 @@ public class Laserable : MonoBehaviour
 
     public LaserableElements element = LaserableElements.None;
     public float elementAmount = 0;
+
+    private void Start()
+    {
+        elementAmount *= transform.localScale.x;
+    }
 }

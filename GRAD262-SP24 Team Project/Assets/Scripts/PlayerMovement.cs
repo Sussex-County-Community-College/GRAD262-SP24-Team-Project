@@ -43,11 +43,14 @@ public class PlayerMovement : MonoBehaviour
         _centerOfScreen = new Vector3(Screen.width / 2, Screen.height / 2);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
             paused = !paused;
+    }
 
+    private void FixedUpdate()
+    {
         if (!paused)
         {
             GetKeyboardInputs();
