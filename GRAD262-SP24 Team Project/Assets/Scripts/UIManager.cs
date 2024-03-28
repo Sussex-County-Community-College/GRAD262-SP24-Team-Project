@@ -7,6 +7,11 @@ public class UIManager : Singleton<UIManager>
     public Slider asteroidHits;
     public Slider playerHealth;
     public Slider playerLaser;
+    public Slider Colbolt;
+    public Slider Gold;
+    public Slider Platinum;
+    public Slider Silver;
+    public Slider Titanium;
 
     private void Start()
     {
@@ -15,7 +20,7 @@ public class UIManager : Singleton<UIManager>
             laser.onElementLasered.AddListener(ElementLasered);
         }
     }
-
+     
     public void PlayerShotWeapon()
     {
         playerWeapons.value--;
