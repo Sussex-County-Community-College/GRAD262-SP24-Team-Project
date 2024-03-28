@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private DockingPort _dockingPort;
+
     [Header("Thrust, Yaw, Pitch, & Roll Force")]
     public float thrustForce = 10000f;
     public float maximumVelocityMagnitude = 1000f;
@@ -47,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
             paused = !paused;
+        if(_dockingPort != null)
+        {
+            _dockingPort.DockShip();
+        }
     }
 
     private void FixedUpdate()
@@ -168,5 +174,15 @@ public class PlayerMovement : MonoBehaviour
             _rigidBody.AddTorque(vector * Time.fixedDeltaTime);
     }
 
+    public void SetDockingPort(DockingPort dockingPort)
+    {
+        _dockingPort = dockingPort;
+    }
+
+    public void Docked()
+    {
+        //Handle ship being docked
+        //Disable ship movement, etc/
+    }
 }
 

@@ -25,6 +25,7 @@ public class SpawnWorldObjects : MonoBehaviour
     [Tooltip("The List of prefabs that can be spawned by this script")]
     public List<GameObject> prefabs;
 
+   
     void Awake()
     {
         // for i from =0 to <spawnCount
