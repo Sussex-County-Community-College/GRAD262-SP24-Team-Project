@@ -6,6 +6,12 @@ public class UIManager : Singleton<UIManager>
     public Slider playerWeapons;
     public Slider asteroidHits;
     public Slider playerHealth;
+    public Slider Colbolt;
+    public Slider Gold;
+    public Slider Platinum;
+    public Slider Silver;
+    public Slider Titanium;
+
 
     private void Start()
     {
