@@ -20,7 +20,7 @@ public class UIManager : Singleton<UIManager>
             laser.onElementLasered.AddListener(ElementLasered);
         }
     }
-
+     
     public void PlayerShotWeapon()
     {
         playerWeapons.value--;
