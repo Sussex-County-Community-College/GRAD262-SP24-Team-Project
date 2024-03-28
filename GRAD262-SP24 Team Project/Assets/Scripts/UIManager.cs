@@ -6,6 +6,7 @@ public class UIManager : Singleton<UIManager>
     public Slider playerWeapons;
     public Slider asteroidHits;
     public Slider playerHealth;
+    public Slider playerLaser;
 
     private void Start()
     {
@@ -43,4 +44,7 @@ public class UIManager : Singleton<UIManager>
     {
         Debug.Log($"lasered element {element} amt {amount}");
     }
+
+
+
 }

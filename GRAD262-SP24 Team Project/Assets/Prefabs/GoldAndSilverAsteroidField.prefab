@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3820270034576386054
+--- !u!1 &7465772935635826828
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3820270034576386168}
-  - component: {fileID: 3820270034576386055}
-  - component: {fileID: -79252471469652980}
+  - component: {fileID: 7465772935635826835}
+  - component: {fileID: 5740661930136766956}
+  - component: {fileID: 7694160789948718941}
   m_Layer: 0
-  m_Name: AsteroidField1
+  m_Name: GoldAndSilverAsteroidField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3820270034576386168
+--- !u!4 &7465772935635826835
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3820270034576386054}
+  m_GameObject: {fileID: 7465772935635826828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,44 +32,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3820270034576386055
+--- !u!114 &5740661930136766956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3820270034576386054}
+  m_GameObject: {fileID: 7465772935635826828}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 856ec5b281bd14c45ae2854b2a75aca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 100
-  spawnRangeMax: {x: 500, y: 500, z: 500}
-  spawnRangeMin: {x: -500, y: -500, z: -500}
-  scaleMax: 50
-  scaleMin: 25
+  spawnCount: 10
+  spawnRangeMax: {x: 2000, y: 500, z: 5000}
+  spawnRangeMin: {x: 1000, y: -500, z: 2000}
+  scaleMax: 100
+  scaleMin: 75
   prefabs:
-  - {fileID: 1281155567026345128, guid: eb6e048f977eb8f49b5ee0478d1192f6, type: 3}
-  - {fileID: 2319000700565176193, guid: 40438f21002ae96488d467f6e45c95df, type: 3}
-  - {fileID: 3529744038003158217, guid: 0b87c806f0606db488e06295488c227b, type: 3}
-  - {fileID: 4497758733331148227, guid: 78b4587a752662e44a4d4c8f6e772133, type: 3}
-  - {fileID: 3896132824321634848, guid: cc24eceab51dc0243aedf896cdd2026a, type: 3}
-  - {fileID: 2319000700565176193, guid: 40438f21002ae96488d467f6e45c95df, type: 3}
   - {fileID: 2623237873410287026, guid: 83e326fc4f606d2448dd47643354424e, type: 3}
-  - {fileID: 6173534935708925286, guid: b09dba1c25babd1438c29d22bde6b34e, type: 3}
---- !u!114 &-79252471469652980
+  - {fileID: 4497758733331148227, guid: 78b4587a752662e44a4d4c8f6e772133, type: 3}
+--- !u!114 &7694160789948718941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3820270034576386054}
+  m_GameObject: {fileID: 7465772935635826828}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e69a58ad1f8b43e418dfc23e4f9b2090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingDistanceFromPlayer: 1500
+  startingDistanceFromPlayer: 1000
   endingDistanceFromPlayer: 10000
-  force: 100
+  force: 0
