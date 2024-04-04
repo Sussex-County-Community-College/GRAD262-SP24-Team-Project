@@ -70,7 +70,16 @@ public class UIManager : Singleton<UIManager>
         {
             transferValue(Gold, playerWeapons);
             transferValue(Gold, playerLaser);
+            transferValue(Colbolt, playerWeapons);
+            transferValue(Colbolt, playerLaser);
+            transferValue(Titanium, playerWeapons);
+            transferValue(Titanium, playerLaser);
+            transferValue(Platinum, playerWeapons);
+            transferValue(Platinum, playerLaser);
+            transferValue(Silver, playerWeapons);
+            transferValue(Silver, playerLaser);
         }
+       
     }
 
     private void LaserFiring()
