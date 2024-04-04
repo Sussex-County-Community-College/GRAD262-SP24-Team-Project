@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 3896132823344136663}
   - component: {fileID: 5975478557904658483}
   - component: {fileID: 8683009855400818271}
+  - component: {fileID: 5105277510054983191}
   m_Layer: 7
   m_Name: Cobalt Asteroid
   m_TagString: Asteroid
@@ -253,6 +254,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   element: 1
   elementAmount: 10
+--- !u!114 &5105277510054983191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3896132824321634848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868ce8fc8642f7c4587317bf98e9c334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destructionParticles: {fileID: 198357973136645638, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
 --- !u!1 &3896132824321668612
 GameObject:
   m_ObjectHideFlags: 0

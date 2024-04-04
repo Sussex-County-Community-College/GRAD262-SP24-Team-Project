@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 7204710698508716457}
   - component: {fileID: 6581103314021815047}
   - component: {fileID: -6436612328204970961}
+  - component: {fileID: 1107501786253879566}
   m_Layer: 7
   m_Name: Titanium Asteroid
   m_TagString: Asteroid
@@ -314,6 +315,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   element: 3
   elementAmount: 10
+--- !u!114 &1107501786253879566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173534935708925286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868ce8fc8642f7c4587317bf98e9c334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destructionParticles: {fileID: 198357973136645638, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
 --- !u!1 &7008330051607871487
 GameObject:
   m_ObjectHideFlags: 0
