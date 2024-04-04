@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private DockingPort _dockingPort;
+    public DockingAssist dockingAssist;
 
     [Header("Thrust, Yaw, Pitch, & Roll Force")]
     public float thrustForce = 10000f;
@@ -52,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
         if(_dockingPort != null)
         {
             _dockingPort.DockShip();
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            dockingAssist.StartDocking();
         }
     }
 
