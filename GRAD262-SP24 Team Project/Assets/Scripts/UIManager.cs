@@ -12,12 +12,14 @@ public class UIManager : Singleton<UIManager>
     public Slider Platinum;
     public Slider Silver;
     public Slider Titanium;
+    public float laserDebitWhenFiring = 0.1f;
 
     private void Start()
     {
         foreach (Laser laser in GameObject.FindObjectsOfType<Laser>())
         {
             laser.onElementLasered.AddListener(ElementLasered);
+            laser.onLaserFiring.AddListener(LaserFiring);
         }
     }
      
@@ -53,6 +55,11 @@ public class UIManager : Singleton<UIManager>
     public void PayForResource(string element)
     {
         Debug.Log($"PayForResource element {element}");
+    }
+
+    private void LaserFiring()
+    {
+        playerLaser.value -= laserDebitWhenFiring;
     }
 
 }

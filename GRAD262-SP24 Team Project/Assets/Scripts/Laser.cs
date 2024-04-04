@@ -5,6 +5,7 @@ using VolumetricLines;
 public class Laser : MonoBehaviour
 {
     public UnityEvent<Laserable.LaserableElements, float> onElementLasered;
+    public UnityEvent onLaserFiring;
     public VolumetricLineBehavior laserLine;
     public AudioSource firingSFX;
     public AudioSource collidingSFX;
@@ -17,7 +18,7 @@ public class Laser : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && UIManager.Instance.playerLaser.value > 0)
         {
             ActivateLaser();
         }
@@ -29,6 +30,8 @@ public class Laser : MonoBehaviour
 
     private void ActivateLaser()
     {
+        onLaserFiring.Invoke();
+
         laserLine.gameObject.SetActive(true);
 
         if (firingSFX && !firingSFX.isPlaying)
