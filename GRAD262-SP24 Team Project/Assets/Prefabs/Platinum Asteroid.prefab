@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 6653881202307684968}
   - component: {fileID: 6116345603136309051}
   - component: {fileID: 3756401366011758677}
+  - component: {fileID: -5398306390053747781}
   m_Layer: 7
   m_Name: Platinum Asteroid
   m_TagString: Asteroid
@@ -395,3 +396,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   element: 12
   elementAmount: 10
+--- !u!114 &-5398306390053747781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653881202608930680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868ce8fc8642f7c4587317bf98e9c334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destructionParticles: {fileID: 198357973136645638, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
