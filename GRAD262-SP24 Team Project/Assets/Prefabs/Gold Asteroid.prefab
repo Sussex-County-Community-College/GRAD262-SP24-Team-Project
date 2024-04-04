@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -5330652717890786727}
   - component: {fileID: -7999987563590481191}
   - component: {fileID: 8231093467334053868}
+  - component: {fileID: 5275047534806917266}
   m_Layer: 7
   m_Name: Gold Asteroid
   m_TagString: Asteroid
@@ -4893,6 +4894,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &5275047534806917266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497758733331148227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a6ad0fd9502b941ab709985e578e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slingshotStrength: 10
+  range: 10
 --- !u!1 &4497758733331162407
 GameObject:
   m_ObjectHideFlags: 0
