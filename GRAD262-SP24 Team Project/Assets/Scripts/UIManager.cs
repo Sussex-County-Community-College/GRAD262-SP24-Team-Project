@@ -50,6 +50,9 @@ public class UIManager : Singleton<UIManager>
         Debug.Log($"lasered element {element} amt {amount}");
     }
 
-
+    public void PayForResource(string element)
+    {
+        Debug.Log($"PayForResource element {element}");
+    }
 
 }
