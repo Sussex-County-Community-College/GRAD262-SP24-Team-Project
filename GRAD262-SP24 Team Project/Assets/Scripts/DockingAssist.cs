@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DockingAssist : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class DockingAssist : MonoBehaviour
     public bool isDockable = false;
 
     public bool isDocked = false;
+
+    public UnityEvent onDocked;
 
     private void Start()
     {
@@ -39,7 +42,10 @@ public class DockingAssist : MonoBehaviour
             if (isDocked)
                 isDocked = false;
             else if (isDockable)
+            {
                 isDocked = true;
+                onDocked.Invoke();
+            }
             else
                 Debug.Log("not dockable");
         }

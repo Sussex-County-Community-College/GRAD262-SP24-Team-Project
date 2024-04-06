@@ -31,6 +31,8 @@ public class UIManager : Singleton<UIManager>
         _elementSliders.Add(Laserable.LaserableElements.Platinum, platinum);
         _elementSliders.Add(Laserable.LaserableElements.Silver, silver);
         _elementSliders.Add(Laserable.LaserableElements.Titanium, titanium);
+
+        GameObject.FindAnyObjectByType<DockingAssist>().onDocked.AddListener(OnPlayerDocked);
     }
 
     public void PlayerShotWeapon()
@@ -65,7 +67,7 @@ public class UIManager : Singleton<UIManager>
             _elementSliders[element].value += amount;
     }
 
-    public void OnPlayerDocked()
+    private void OnPlayerDocked()
     {
         foreach(Slider source in _elementSliders.Values)
         {
