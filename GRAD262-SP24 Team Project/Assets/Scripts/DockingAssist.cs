@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,24 +8,41 @@ public class DockingAssist : MonoBehaviour
     public Transform dockingPort;
     public float alignmentSpeed = 2f;
     public float approachSpeed = 5f;
-    public float dockingDistance = 1f;
+    public float dockingDistance = 100f;
     public LayerMask obstacleMask;
 
-    private bool isDocking = false;
+    public bool isDocking = false;
 
-    private void Update()
+    public SpaceStation dockableSpaceStation;
+    public bool isDockable = false;
+
+    public bool isDocked = false;
+
+    private void Start()
     {
-        if (isDocking)
+        foreach (SpaceStation station in GameObject.FindObjectsOfType<SpaceStation>())
         {
-            AlignWithDockingPort();
-            ApproachDockingPort();
-            CheckPlayerMovement();
+            station.onPlayerDockable.AddListener(OnPlayerDockable);
         }
     }
 
-    public void StartDocking()
+    private void OnPlayerDockable(SpaceStation station, bool dockable)
     {
-        isDocking = true;
+        isDockable = dockable;
+        dockableSpaceStation = station;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (isDocked)
+                isDocked = false;
+            else if (isDockable)
+                isDocked = true;
+            else
+                Debug.Log("not dockable");
+        }
     }
 
     private void AlignWithDockingPort()
@@ -38,7 +56,7 @@ public class DockingAssist : MonoBehaviour
     {
         Vector3 direction = dockingPort.position - transform.position;
         float distance = direction.magnitude;
-            if(distance > dockingDistance)
+        if (distance > dockingDistance)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, direction, out hit, distance, obstacleMask))
@@ -50,10 +68,7 @@ public class DockingAssist : MonoBehaviour
             {
                 transform.Translate(direction.normalized * approachSpeed * Time.deltaTime, Space.World);
             }
-            
-            
-            
-            
+
         }
         else
         {

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpaceStation : MonoBehaviour
 {
     public GameObject player;
-    public float maxDockingDistance = 1000;
+    public float maxDockingDistance = 500f;
+    public UnityEvent<SpaceStation, bool> onPlayerDockable;
 
     private float _orbitingSpeed;
 
@@ -20,10 +22,12 @@ public class SpaceStation : MonoBehaviour
         {
             _orbitingSpeed = GetComponent<RotateAround>().speed;
             GetComponent<RotateAround>().speed = 0;
+            onPlayerDockable.Invoke(this, true);
         }
         else
         {
             GetComponent<RotateAround>().speed = _orbitingSpeed;
+            onPlayerDockable.Invoke(this, false);
         }
     }
 }

@@ -15,7 +15,7 @@ public class DockingPort : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _dockedShip = other.transform;
-            _dockedShip.GetComponent<PlayerMovement>().SetDockingPort(this);
+            //_dockedShip.GetComponent<PlayerMovement>().SetDockingPort(this);
         }
     }
 
@@ -31,7 +31,7 @@ public class DockingPort : MonoBehaviour
             if (distancetoDock < 0.1f)
             {
                 //Ship is docked
-                _dockedShip.GetComponent<PlayerMovement>().Docked();
+                //_dockedShip.GetComponent<PlayerMovement>().Docked();
                 _dockedShip = null;
             }
         }

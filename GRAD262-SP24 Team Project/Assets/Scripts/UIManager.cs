@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +9,14 @@ public class UIManager : Singleton<UIManager>
     public Slider asteroidHits;
     public Slider playerHealth;
     public Slider playerLaser;
-    public Slider Colbolt;
-    public Slider Gold;
-    public Slider Platinum;
-    public Slider Silver;
-    public Slider Titanium;
+    public Slider cobalt;
+    public Slider gold;
+    public Slider platinum;
+    public Slider silver;
+    public Slider titanium;
     public float laserDebitWhenFiring = 0.1f;
+
+    private Dictionary<Laserable.LaserableElements, Slider> _elementSliders = new Dictionary<Laserable.LaserableElements, Slider>();
 
     private void Start()
     {
@@ -22,8 +25,14 @@ public class UIManager : Singleton<UIManager>
             laser.onElementLasered.AddListener(ElementLasered);
             laser.onLaserFiring.AddListener(LaserFiring);
         }
+
+        _elementSliders.Add(Laserable.LaserableElements.Cobalt, cobalt);
+        _elementSliders.Add(Laserable.LaserableElements.Gold, gold);
+        _elementSliders.Add(Laserable.LaserableElements.Platinum, platinum);
+        _elementSliders.Add(Laserable.LaserableElements.Silver, silver);
+        _elementSliders.Add(Laserable.LaserableElements.Titanium, titanium);
     }
-     
+
     public void PlayerShotWeapon()
     {
         playerWeapons.value--;
@@ -52,34 +61,21 @@ public class UIManager : Singleton<UIManager>
     {
         Debug.Log($"lasered element {element} amt {amount}");
 
-        if (element == Laserable.LaserableElements.Gold)
-        {
-            Gold.value += amount;
-        }
+        if (element != Laserable.LaserableElements.None)
+            _elementSliders[element].value += amount;
     }
 
-    public void PayForResource(string element)
+    public void OnPlayerDocked()
     {
-        Debug.Log($"PayForResource element {element}");
-
-        Laserable.LaserableElements enumElement;
-
-        Enum.TryParse<Laserable.LaserableElements>(element, out enumElement);
-
-        if (enumElement == Laserable.LaserableElements.Gold && Gold.value > 0)
+        foreach(Slider source in _elementSliders.Values)
         {
-            transferValue(Gold, playerWeapons);
-            transferValue(Gold, playerLaser);
-            transferValue(Colbolt, playerWeapons);
-            transferValue(Colbolt, playerLaser);
-            transferValue(Titanium, playerWeapons);
-            transferValue(Titanium, playerLaser);
-            transferValue(Platinum, playerWeapons);
-            transferValue(Platinum, playerLaser);
-            transferValue(Silver, playerWeapons);
-            transferValue(Silver, playerLaser);
+            transferValue(source, playerWeapons);
         }
-       
+
+        foreach (Slider source in _elementSliders.Values)
+        {
+            transferValue(source, playerLaser);
+        }
     }
 
     private void LaserFiring()
@@ -87,9 +83,10 @@ public class UIManager : Singleton<UIManager>
         playerLaser.value -= laserDebitWhenFiring;
     }
 
-    void transferValue(Slider source, Slider destination)
+    private void transferValue(Slider source, Slider destination)
     {
         float transferAmt = Mathf.Min(source.value, destination.maxValue - destination.value);
+
         source.value -= transferAmt;
         destination.value += transferAmt;
     }

@@ -21,4 +21,10 @@ public class Laserable : MonoBehaviour
     {
         elementAmount *= transform.localScale.x;
     }
+
+    private void Update()
+    {
+        if (elementAmount <= 0)
+            Destroy(gameObject);
+    }
 }

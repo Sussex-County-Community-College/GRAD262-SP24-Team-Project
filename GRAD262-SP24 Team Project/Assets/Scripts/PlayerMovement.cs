@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private DockingPort _dockingPort;
-    public DockingAssist dockingAssist;
-
     [Header("Thrust, Yaw, Pitch, & Roll Force")]
     public float thrustForce = 10000f;
     public float maximumVelocityMagnitude = 1000f;
@@ -50,15 +47,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
             paused = !paused;
-        if(_dockingPort != null)
-        {
-            _dockingPort.DockShip();
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            dockingAssist.StartDocking();
-        }
     }
 
     private void FixedUpdate()
@@ -72,13 +60,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void GetKeyboardInputs()
     {
-        ForwardThrust(Input.GetAxis("Horizontal"));
-        RollMovement(Input.GetAxis("Vertical"));
+        bool isDocked = GetComponent<DockingAssist>().isDocked;
+
+        ForwardThrust(isDocked ? 0 : Input.GetAxis("Horizontal"));
+        RollMovement(isDocked ? 0 : Input.GetAxis("Vertical"));
     }
 
     private void GetMouseInputs()
     {
-        Vector3 distanceFromCenter = Input.mousePosition - _centerOfScreen;
+        bool isDocked = GetComponent<DockingAssist>().isDocked;
+
+        Vector3 distanceFromCenter = isDocked ? Vector3.zero : Input.mousePosition - _centerOfScreen;
 
         YawMovement(distanceFromCenter.x / _centerOfScreen.x);
         PitchMovement(distanceFromCenter.y / _centerOfScreen.y);
@@ -178,17 +170,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!Mathf.Approximately(0f, vector.magnitude))
             _rigidBody.AddTorque(vector * Time.fixedDeltaTime);
-    }
-
-    public void SetDockingPort(DockingPort dockingPort)
-    {
-        _dockingPort = dockingPort;
-    }
-
-    public void Docked()
-    {
-        //Handle ship being docked
-        //Disable ship movement, etc/
     }
 }
 
