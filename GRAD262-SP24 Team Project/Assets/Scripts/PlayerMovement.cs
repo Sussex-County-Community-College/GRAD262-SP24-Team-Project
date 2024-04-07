@@ -39,8 +39,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        GetComponent<DockingAssist>().onDocked.AddListener(SetPaused);
         _rigidBody = GetComponent<Rigidbody>();
         _centerOfScreen = new Vector3(Screen.width / 2, Screen.height / 2);
+    }
+
+    private void SetPaused(bool value)
+    {
+        paused = value;
     }
 
     private void Update()
@@ -60,17 +66,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void GetKeyboardInputs()
     {
-        bool isDocked = GetComponent<DockingAssist>().isDocked;
-
-        ForwardThrust(isDocked ? 0 : Input.GetAxis("Horizontal"));
-        RollMovement(isDocked ? 0 : Input.GetAxis("Vertical"));
+        ForwardThrust(paused ? 0 : Input.GetAxis("Horizontal"));
+        RollMovement(paused ? 0 : Input.GetAxis("Vertical"));
     }
 
     private void GetMouseInputs()
     {
-        bool isDocked = GetComponent<DockingAssist>().isDocked;
-
-        Vector3 distanceFromCenter = isDocked ? Vector3.zero : Input.mousePosition - _centerOfScreen;
+        Vector3 distanceFromCenter = paused ? Vector3.zero : Input.mousePosition - _centerOfScreen;
 
         YawMovement(distanceFromCenter.x / _centerOfScreen.x);
         PitchMovement(distanceFromCenter.y / _centerOfScreen.y);

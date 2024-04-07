@@ -7,9 +7,10 @@ public class SlingshotZone : MonoBehaviour
     public float slingshotStrength = 10f; //Strength of the slingshot effect
     public float range = 10f; //Range of the slingshot zone
 
-    private void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        Rigidbody rb = other.GetComponent<Rigidbody>();
+        Debug.Log("SlingshotZone.OnCollisionEnter"); 
+        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
             Vector3 direction = transform.position - rb.position;

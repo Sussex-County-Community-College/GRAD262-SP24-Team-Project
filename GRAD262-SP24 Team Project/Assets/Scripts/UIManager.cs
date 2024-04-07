@@ -67,16 +67,19 @@ public class UIManager : Singleton<UIManager>
             _elementSliders[element].value += amount;
     }
 
-    private void OnPlayerDocked()
+    private void OnPlayerDocked(bool docked)
     {
-        foreach(Slider source in _elementSliders.Values)
+        if (docked)
         {
-            transferValue(source, playerWeapons);
-        }
+            foreach (Slider source in _elementSliders.Values)
+            {
+                transferValue(source, playerWeapons);
+            }
 
-        foreach (Slider source in _elementSliders.Values)
-        {
-            transferValue(source, playerLaser);
+            foreach (Slider source in _elementSliders.Values)
+            {
+                transferValue(source, playerLaser);
+            }
         }
     }
 

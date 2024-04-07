@@ -19,7 +19,7 @@ public class DockingAssist : MonoBehaviour
 
     public bool isDocked = false;
 
-    public UnityEvent onDocked;
+    public UnityEvent<bool> onDocked;
 
     private void Start()
     {
@@ -40,11 +40,14 @@ public class DockingAssist : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (isDocked)
+            {
                 isDocked = false;
+                onDocked.Invoke(isDocked);
+            }
             else if (isDockable)
             {
                 isDocked = true;
-                onDocked.Invoke();
+                onDocked.Invoke(isDocked);
             }
             else
                 Debug.Log("not dockable");
