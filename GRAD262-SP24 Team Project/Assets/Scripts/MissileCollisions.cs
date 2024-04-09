@@ -8,10 +8,14 @@ public class MissileCollisions : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Asteroid"))
         {
-            Debug.Log("Missle hit");
+            Debug.Log("Missle hit Asteroid!");
             UIManager.Instance.AsteroidBlast();
             Destroy(gameObject);
             Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Missle hit Enemy!");
         }
     }
 

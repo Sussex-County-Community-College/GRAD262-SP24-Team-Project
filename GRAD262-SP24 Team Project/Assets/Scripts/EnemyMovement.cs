@@ -19,55 +19,66 @@ public class EnemyMovement : ShipMovement
     public bool loop = false;
 
     private float _startTime = 0;
-    private Quaternion _startRotation;
+    private float _endTime = 0;
     private Dictionary<MovementType, Movement> _movementsThisFrame = new Dictionary<MovementType, Movement>();
 
     override protected void Start()
     {
         base.Start();
+        SetMovementStartAndEndTimes();
+    }
+
+    private void SetMovementStartAndEndTimes()
+    {
         _startTime = Time.time;
-        _startRotation = transform.rotation;
+
+        foreach (Movement movement in movements)
+        {
+            _endTime = Mathf.Max(_endTime, _startTime + movement.startTime + movement.duration);
+        }
     }
 
     protected void Update()
     {
         _movementsThisFrame.Clear();
 
-        bool foundMovement = false;
-
         foreach (Movement movement in movements)
         {
             float movementStartTime = _startTime + movement.startTime;
             float movementEndTime = movementStartTime + movement.duration;
 
-            if (Time.time >= movementStartTime && Time.time <= movementEndTime)
+            if (Time.time > movementStartTime && Time.time < movementEndTime)
             {
-                foundMovement = true;
-
                 if (_movementsThisFrame.ContainsKey(movement.type))
                     Debug.LogWarning($"ignoring key {movement.type} overlap, startTime={movement.startTime}");
                 else
                 {
-                    if (movement.type == MovementType.die)
+                    switch (movement.type)
                     {
-                        Destroy(gameObject);
-                    }
-                    else if (movement.type == MovementType.restore)
-                    {
-                        transform.rotation = Quaternion.Slerp(transform.rotation, _startRotation, 0.01f);
-                    }
-                    else
-                    {
-                        _movementsThisFrame.Add(movement.type, movement);
+                        case MovementType.die:
+                            Destroy(gameObject);
+                            break;
+                        case MovementType.restore:
+                            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.01f);
+                            break;
+                        case MovementType.thrust:
+                        case MovementType.pitch:
+                        case MovementType.roll:
+                        case MovementType.yaw:
+                            _movementsThisFrame.Add(movement.type, movement);
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
 
-            if (!foundMovement && loop)
-                _startTime = Time.time;
+            if (Time.time > _endTime && loop)
+            {
+                SetMovementStartAndEndTimes();
+            }
         }
 
-        
     }
 
     protected override float GetPitch()
