@@ -16,6 +16,7 @@ public class EnemyMovement : ShipMovement
 
     [Header("Patrol Movement")]
     public Movement[] movements;
+    public bool loop = false;
 
     private float _startTime = 0;
     private Quaternion _startRotation;
@@ -32,16 +33,16 @@ public class EnemyMovement : ShipMovement
     {
         _movementsThisFrame.Clear();
 
+        bool foundMovement = false;
+
         foreach (Movement movement in movements)
         {
-            Debug.Log($"type={ movement.type.ToString()}");
-
             float movementStartTime = _startTime + movement.startTime;
             float movementEndTime = movementStartTime + movement.duration;
 
-            if (Time.time > movementStartTime && Time.time < movementEndTime)
+            if (Time.time >= movementStartTime && Time.time <= movementEndTime)
             {
-                Debug.Log($"active type={ movement.type.ToString()}");
+                foundMovement = true;
 
                 if (_movementsThisFrame.ContainsKey(movement.type))
                     Debug.LogWarning($"ignoring key {movement.type} overlap, startTime={movement.startTime}");
@@ -53,18 +54,16 @@ public class EnemyMovement : ShipMovement
                     }
                     else if (movement.type == MovementType.restore)
                     {
-                        GetComponent<Rigidbody>().isKinematic = true;
-                        transform.rotation = Quaternion.Slerp(transform.rotation, _startRotation, 0.5f);
+                        transform.rotation = Quaternion.Slerp(transform.rotation, _startRotation, 0.01f);
                     }
                     else
                     {
-                        GetComponent<Rigidbody>().isKinematic = false;
                         _movementsThisFrame.Add(movement.type, movement);
                     }
                 }
             }
 
-            if (_movementsThisFrame.Count == 0)
+            if (!foundMovement && loop)
                 _startTime = Time.time;
         }
 
