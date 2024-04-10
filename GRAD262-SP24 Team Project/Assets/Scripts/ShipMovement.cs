@@ -33,7 +33,8 @@ abstract public class ShipMovement : MonoBehaviour
     [Header("Type 'p' to toggle pause")]
     public bool paused = false;
 
-    private Rigidbody _rigidBody;
+    protected Rigidbody _rigidBody;
+
     private bool _rollNoiseStart = true;
     private bool _yawNoiseStart = true;
     private bool _pitchNoiseStart = true;
