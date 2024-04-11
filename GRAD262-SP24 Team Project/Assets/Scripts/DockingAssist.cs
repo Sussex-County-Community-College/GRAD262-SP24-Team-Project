@@ -48,6 +48,7 @@ public class DockingAssist : MonoBehaviour
             {
                 isDocked = true;
                 onDocked.Invoke(isDocked);
+                
             }
             else
                 Debug.Log("not dockable");
@@ -87,6 +88,31 @@ public class DockingAssist : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //Set the player's rigidbody iskematic property to true
+            Rigidbody playerRigidbody = other.GetComponent<Rigidbody>();
+            if(playerRigidbody != null)
+            {
+                playerRigidbody.isKinematic = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //Set the player's rigidbody iskematic property to false
+            Rigidbody playerRigidbody = other.GetComponent<Rigidbody>();
+            if(playerRigidbody != null)
+            {
+                playerRigidbody.isKinematic = false;
+            }
+        }
+    }
     private void CheckPlayerMovement()
     {
         float moveInput = Input.GetAxis("Vertical"); //Assuming vertical axis controls forward/backward movement
