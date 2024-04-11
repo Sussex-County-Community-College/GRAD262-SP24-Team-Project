@@ -1,39 +1,19 @@
-
 using UnityEngine;
 
-
-public class PlayerWeapons : MonoBehaviour
+public class PlayerWeapons : ShipWeapons
 {
-    public GameObject missilePrefab;
-    public float missileForce = 100000f;
-    public GameObject[] shipWeapons;
-
-    // Update is called once per frame
-    void Update()
+    protected override bool Fire()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-            FireWeapon();
+        return Input.GetKeyDown(KeyCode.F);
     }
 
-    private void FireWeapon()
+    protected override void WeaponFired()
     {
-        if (UIManager.Instance.WeaponsLeft() > 0)
-        {
-            GameObject weapon = shipWeapons[Random.Range(0, shipWeapons.Length)];
-            GameObject missile = Instantiate(missilePrefab, weapon.transform.position, weapon.transform.rotation);
-            Rigidbody rb = missile.GetComponent<Rigidbody>();
+        UIManager.Instance.PlayerShotWeapon();
+    }
 
-            if (rb)
-            {
-                rb.velocity = GetComponent<Rigidbody>().velocity;
-                rb.AddForce(transform.forward * missileForce  * Time.fixedDeltaTime);
-            }
-
-            UIManager.Instance.PlayerShotWeapon();
-        }
-        else
-        {
-            UIManager.Instance.RefillWeapons();
-        }
+    protected override int WeaponsLeft()
+    {
+        return UIManager.Instance.WeaponsLeft();
     }
 }
