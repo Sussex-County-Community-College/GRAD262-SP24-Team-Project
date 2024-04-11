@@ -32,7 +32,7 @@ public class UIManager : Singleton<UIManager>
         _elementSliders.Add(Laserable.LaserableElements.Silver, silver);
         _elementSliders.Add(Laserable.LaserableElements.Titanium, titanium);
 
-        GameObject.FindAnyObjectByType<DockingAssist>().onDocked.AddListener(OnPlayerDocked);
+        FindObjectOfType<DockingAssist>().onDocked.AddListener(OnPlayerDocked);
     }
 
     public void PlayerShotWeapon()
