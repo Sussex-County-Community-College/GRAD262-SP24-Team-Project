@@ -233,10 +233,10 @@ GameObject:
   m_Component:
   - component: {fileID: 558174024482672880}
   - component: {fileID: 5249299664061152968}
-  - component: {fileID: 7204710698508716457}
   - component: {fileID: 6581103314021815047}
   - component: {fileID: -6436612328204970961}
   - component: {fileID: 1107501786253879566}
+  - component: {fileID: 833878619718588604}
   m_Layer: 7
   m_Name: Titanium Asteroid
   m_TagString: Asteroid
@@ -251,8 +251,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6173534935708925286}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.900697, y: 4.367358, z: 2.3338184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7466544940575952140}
@@ -272,19 +272,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tumble: 0.25
---- !u!135 &7204710698508716457
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6173534935708925286}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.80020136
-  m_Center: {x: 0, y: 0, z: 0.19979864}
 --- !u!54 &6581103314021815047
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -328,6 +315,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionParticles: {fileID: 198357973136645638, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
+--- !u!135 &833878619718588604
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173534935708925286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Center: {x: -2.5, y: 0.75, z: -1}
 --- !u!1 &7008330051607871487
 GameObject:
   m_ObjectHideFlags: 0
