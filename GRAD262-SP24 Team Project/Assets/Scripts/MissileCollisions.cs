@@ -15,9 +15,11 @@ public class MissileCollisions : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Missle hit Enemy!");
+           Debug.Log("Missle hit Enemy!");
+           Destroy(gameObject);
+           Destroy(collision.gameObject);
         }
     }
 
-    
+     
 }
