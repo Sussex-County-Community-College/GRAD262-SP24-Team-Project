@@ -6,6 +6,11 @@ public class PlayerMovement : ShipMovement
     public float deadZoneRadius = 0.5f;
 
     private Vector3 _centerOfScreen;
+    private bool isDocking;
+    private DockingPort dockingPort;
+
+    public float rotateSpeed = 5f;
+    public float moveSpeed = 5f;
 
     override protected void Start()
     {
@@ -36,9 +41,43 @@ public class PlayerMovement : ShipMovement
 
     virtual protected void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P)) {
             paused = !paused;
+        }
+
+        if (!isDocking && Input.GetKeyDown(KeyCode.B))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+            {
+                DockingPort port = hit.collider.GetComponent<DockingPort>();
+                if (port != null)
+                {
+                    isDocking = true;
+                    dockingPort = port;
+                }
+            }
+        }
+        if (isDocking)
+        {
+            HandleDocking();
+        }
+            
     }
 
+    private void HandleDocking()
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(dockingPort.transform.position - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+
+        transform.position = Vector3.MoveTowards(transform.position, dockingPort.transform.position, moveSpeed * Time.deltaTime);
+
+        float distanceToDock = Vector3.Distance(transform.position, dockingPort.transform.position);
+        if (distanceToDock < 0.1f)
+        {
+            isDocking = false;
+            dockingPort.DockShip();
+        }
+    }
 }
 

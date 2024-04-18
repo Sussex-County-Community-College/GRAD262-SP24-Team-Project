@@ -39,20 +39,49 @@ public class DockingAssist : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            if (isDocked)
-            {
-                isDocked = false;
-                onDocked.Invoke(isDocked);
+            if (!isDocked && isDockable) {
+                StartDocking();
             }
-            else if (isDockable)
-            {
-                isDocked = true;
-                onDocked.Invoke(isDocked);
-                
+            else if (isDocked) {
+                StopDocking();
             }
-            else
-                Debug.Log("not dockable");
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isDocking)
+        {
+            ContinueDocking();
+        }
+    }
+
+    private void StartDocking()
+    {
+        Debug.Log("DockingAssist.Update: start docking...");
+        isDocking = true;
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    private void ContinueDocking()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, dockingPort.position, approachSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, dockingPort.position) < Mathf.Epsilon)
+        {
+            isDocking = false;
+            isDocked = true;
+            onDocked.Invoke(isDocked);
+        }
+    }
+
+    private void StopDocking()
+    {
+        Debug.Log("DockingAssist.Update: stop docking...");
+        isDocked = false;
+        isDocking = false;
+        GetComponent<Rigidbody>().isKinematic = false;
+        onDocked.Invoke(isDocked);
     }
 
     private void AlignWithDockingPort()
@@ -76,15 +105,19 @@ public class DockingAssist : MonoBehaviour
             }
             else
             {
-                transform.Translate(direction.normalized * approachSpeed * Time.deltaTime, Space.World);
+                float currentApproachSpeed = Mathf.Lerp(approachSpeed, 0f, distance / dockingDistance);
+                transform.Translate(direction.normalized * currentApproachSpeed * Time.deltaTime, Space.World);
             }
 
         }
         else
         {
             //Docking complete
-            isDocking = false;
-            Debug.Log("Docking complete!");
+            if (Input.GetKeyDown(KeyCode.B)){
+                isDocking = false;
+                Debug.Log("Docking complete!");
+            }
+            
         }
     }
 
