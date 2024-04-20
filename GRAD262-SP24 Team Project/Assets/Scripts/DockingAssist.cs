@@ -6,51 +6,28 @@ using UnityEngine.Events;
 
 public class DockingAssist : MonoBehaviour
 {
+    public enum DockingState { notDockable, dockable, docking, docked, undocking };
+    public DockingState dockingState = DockingState.notDockable;
     public Transform dockingPort;
-    public float alignmentSpeed = 2f;
     public float approachSpeed = 5f;
-    public float dockingDistance = 100f;
-    public LayerMask obstacleMask;
-
-    public bool isDocking = false;
-
-    public SpaceStation dockableSpaceStation;
-    public bool isDockable = false;
-
-    public bool isDocked = false;
-
-    public UnityEvent<bool> onDocked;
-
-    private void Start()
-    {
-        foreach (SpaceStation station in GameObject.FindObjectsOfType<SpaceStation>())
-        {
-            station.onPlayerDockable.AddListener(OnPlayerDockable);
-        }
-    }
-
-    private void OnPlayerDockable(SpaceStation station, bool dockable)
-    {
-        isDockable = dockable;
-        dockableSpaceStation = station;
-    }
+    public float approachRotationEasing = 0.01f;
+    public UnityEvent<DockingState> onDockingStateChange;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (dockingState == DockingState.dockable)
         {
-            if (!isDocked && isDockable) {
-                StartDocking();
-            }
-            else if (isDocked) {
-                StopDocking();
-            }
+            StartDocking();
+        }
+        else if (dockingState == DockingState.docked && Input.GetKeyDown(KeyCode.B))
+        {
+            StopDocking();
         }
     }
 
     private void FixedUpdate()
     {
-        if (isDocking)
+        if (dockingState == DockingState.docking)
         {
             ContinueDocking();
         }
@@ -58,101 +35,58 @@ public class DockingAssist : MonoBehaviour
 
     private void StartDocking()
     {
-        Debug.Log("DockingAssist.Update: start docking...");
-        isDocking = true;
+        dockingState = DockingState.docking;
+        onDockingStateChange.Invoke(dockingState);
         GetComponent<Rigidbody>().isKinematic = true;
     }
 
     private void ContinueDocking()
     {
         transform.position = Vector3.MoveTowards(transform.position, dockingPort.position, approachSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, dockingPort.parent.rotation, approachRotationEasing);
 
-        if (Vector3.Distance(transform.position, dockingPort.position) < Mathf.Epsilon)
+        bool rotationComplete = 1 - Mathf.Abs(Quaternion.Dot(transform.rotation, dockingPort.parent.rotation)) < Mathf.Epsilon;
+
+        if (Vector3.Distance(transform.position, dockingPort.position) < Mathf.Epsilon && rotationComplete)
         {
-            isDocking = false;
-            isDocked = true;
-            onDocked.Invoke(isDocked);
+            dockingState = DockingState.docked;
+            onDockingStateChange.Invoke(dockingState);
+            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<PlayerMovement>().paused = true;
         }
     }
 
     private void StopDocking()
     {
-        Debug.Log("DockingAssist.Update: stop docking...");
-        isDocked = false;
-        isDocking = false;
-        GetComponent<Rigidbody>().isKinematic = false;
-        onDocked.Invoke(isDocked);
-    }
-
-    private void AlignWithDockingPort()
-    {
-        Vector3 targetDirection = dockingPort.position - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, alignmentSpeed * Time.deltaTime);
-    }
-
-    private void ApproachDockingPort()
-    {
-        Vector3 direction = dockingPort.position - transform.position;
-        float distance = direction.magnitude;
-        if (distance > dockingDistance)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, direction, out hit, distance, obstacleMask))
-            {
-                Vector3 avoidDirection = Vector3.Reflect(direction.normalized, hit.normal);
-                transform.Translate(direction.normalized * approachSpeed * Time.deltaTime, Space.World);
-            }
-            else
-            {
-                float currentApproachSpeed = Mathf.Lerp(approachSpeed, 0f, distance / dockingDistance);
-                transform.Translate(direction.normalized * currentApproachSpeed * Time.deltaTime, Space.World);
-            }
-
-        }
-        else
-        {
-            //Docking complete
-            if (Input.GetKeyDown(KeyCode.B)){
-                isDocking = false;
-                Debug.Log("Docking complete!");
-            }
-            
-        }
+        GetComponent<PlayerMovement>().paused = false;
+        dockingState = DockingState.undocking;
+        onDockingStateChange.Invoke(dockingState);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (dockingState == DockingState.notDockable && other.gameObject.CompareTag("DockingPort"))
         {
-            //Set the player's rigidbody iskematic property to true
-            Rigidbody playerRigidbody = other.GetComponent<Rigidbody>();
-            if(playerRigidbody != null)
-            {
-                playerRigidbody.isKinematic = true;
-            }
+            dockingState = DockingState.dockable;
+            onDockingStateChange.Invoke(dockingState);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("DockingPort"))
         {
-            //Set the player's rigidbody iskematic property to false
-            Rigidbody playerRigidbody = other.GetComponent<Rigidbody>();
-            if(playerRigidbody != null)
+            if (dockingState == DockingState.undocking)
             {
-                playerRigidbody.isKinematic = false;
+                dockingState = DockingState.notDockable;
+                onDockingStateChange.Invoke(dockingState);
+            }
+            else if (dockingState == DockingState.dockable)
+            {
+                dockingState = DockingState.notDockable;
+                onDockingStateChange.Invoke(dockingState);
             }
         }
     }
-    private void CheckPlayerMovement()
-    {
-        float moveInput = Input.GetAxis("Vertical"); //Assuming vertical axis controls forward/backward movement
-        if (moveInput != 0f)
-        {
-            isDocking = false;
-            Debug.Log("Docking canceled due to player movement.");
-        }
-    }
+
 }

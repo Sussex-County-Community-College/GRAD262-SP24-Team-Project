@@ -32,7 +32,23 @@ public class UIManager : Singleton<UIManager>
         _elementSliders.Add(Laserable.LaserableElements.Silver, silver);
         _elementSliders.Add(Laserable.LaserableElements.Titanium, titanium);
 
-        FindObjectOfType<DockingAssist>().onDocked.AddListener(OnPlayerDocked);
+        FindObjectOfType<DockingAssist>().onDockingStateChange.AddListener(OnDockingStateChange);
+    }
+
+    private void OnDockingStateChange(DockingAssist.DockingState dockingState)
+    {
+        if (dockingState == DockingAssist.DockingState.docked)
+        {
+            foreach (Slider source in _elementSliders.Values)
+            {
+                transferValue(source, playerWeapons);
+            }
+
+            foreach (Slider source in _elementSliders.Values)
+            {
+                transferValue(source, playerLaser);
+            }
+        }
     }
 
     public void PlayerShotWeapon()
@@ -65,22 +81,6 @@ public class UIManager : Singleton<UIManager>
 
         if (element != Laserable.LaserableElements.None)
             _elementSliders[element].value += amount;
-    }
-
-    private void OnPlayerDocked(bool docked)
-    {
-        if (docked)
-        {
-            foreach (Slider source in _elementSliders.Values)
-            {
-                transferValue(source, playerWeapons);
-            }
-
-            foreach (Slider source in _elementSliders.Values)
-            {
-                transferValue(source, playerLaser);
-            }
-        }
     }
 
     private void LaserFiring()
