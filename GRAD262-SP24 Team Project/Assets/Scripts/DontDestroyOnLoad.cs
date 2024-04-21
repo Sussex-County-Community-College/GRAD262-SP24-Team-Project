@@ -25,7 +25,7 @@ public class DontDestroyOnLoad : MonoBehaviour
 
     private void OnSceneChanged(Scene current, Scene next)
     {
-        if (disableOnSceneChanged)
+        if (disableOnSceneChanged && current.buildIndex >= 0)
         {
             gameObject.SetActive(!gameObject.activeSelf);
         }

@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1581996974230550515}
   - component: {fileID: 1581996974230550504}
   m_Layer: 0
-  m_Name: Enemy1
+  m_Name: Stalker
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,46 +146,23 @@ MonoBehaviour:
   player: {fileID: 0}
   movements:
   - type: 1
-    value: 0.1
+    value: 1
     startTime: 0
-    duration: 20
+    duration: 5
   - type: 6
-    value: 0.01
-    startTime: 20
-    duration: 10
+    value: 0.1
+    startTime: 5
+    duration: 5
   - type: 7
     value: 100
-    startTime: 20
-    duration: 10
-  - type: 1
-    value: 100
-    startTime: 20
-    duration: 10
-  - type: 7
-    value: 100
-    startTime: 20
-    duration: 10
+    startTime: 10
+    duration: 5
   - type: 0
     value: 100
-    startTime: 20
-    duration: 10
-  - type: 7
-    value: 100
-    startTime: 20
-    duration: 10
-  - type: 0
-    value: 100
-    startTime: 20
-    duration: 10
-  - type: 2
-    value: 100
-    startTime: 20
-    duration: 10
-  - type: 7
-    value: 100
-    startTime: 20
-    duration: 10
+    startTime: 15
+    duration: 5
   loop: 1
+  minDistanceToPlayer: 200
 --- !u!136 &1581996974230550516
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -13,6 +13,10 @@ public class DockingAssist : MonoBehaviour
     public float approachRotationEasing = 0.01f;
     public UnityEvent<DockingState> onDockingStateChange;
 
+    private void Start()
+    {
+        dockingPort = GameObject.FindGameObjectWithTag("DockingPort").transform;
+    }
     private void Update()
     {
         if (dockingState == DockingState.dockable)

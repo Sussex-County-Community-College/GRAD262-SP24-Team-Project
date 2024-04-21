@@ -4,7 +4,7 @@ public class PlayerWeapons : ShipWeapons
 {
     protected override bool Fire()
     {
-        return Input.GetKeyDown(KeyCode.F);
+        return Input.GetMouseButton(0);
     }
 
     protected override void WeaponFired()

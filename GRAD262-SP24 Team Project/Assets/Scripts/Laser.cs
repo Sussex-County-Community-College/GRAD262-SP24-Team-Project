@@ -52,18 +52,31 @@ public class Laser : MonoBehaviour
                 onElementLasered.Invoke(laserable.element, amountLasered);
             }
 
+            ParticleSystem particleSFX = laserLine.GetComponent<ParticleSystem>();
+
             if (collidingSFX)
             {
-                collidingSFX.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + hit.distance);
+                collidingSFX.transform.position = hit.transform.position;
 
                 if (laserable.elementAmount > 0)
                 {
                     if (!collidingSFX.isPlaying)
                         collidingSFX.Play();
+
+                    if (particleSFX && !particleSFX.isPlaying)
+                        particleSFX.Play();
                 }
-                else if (collidingSFX.isPlaying)
+                else
                 {
-                    collidingSFX.Stop();
+                    if (collidingSFX.isPlaying)
+                    {
+                        collidingSFX.Stop();
+                    }
+
+                    if (particleSFX && particleSFX.isPlaying)
+                    {
+                        particleSFX.Stop();
+                    }
                 }
             }
         }
