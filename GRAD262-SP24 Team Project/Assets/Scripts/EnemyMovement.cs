@@ -129,13 +129,13 @@ public class EnemyMovement : ShipMovement
 
     bool TakeEvasiveAction()
     {
-        return distanceToPlayer < minDistanceToPlayer;
+        return evasiveMovements.Length > 0 && distanceToPlayer < minDistanceToPlayer;
     }
 
     private void RestoreRotation(float easing)
     {
         Vector3 currentRotation = transform.rotation.eulerAngles;
-        Vector3 targetRotation = new Vector3(0, currentRotation.y, 0);
+        Vector3 targetRotation = Vector3.zero; //  new Vector3(0, currentRotation.y, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetRotation), easing);
     }
 

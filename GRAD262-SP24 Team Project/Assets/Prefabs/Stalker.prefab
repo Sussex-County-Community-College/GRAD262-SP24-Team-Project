@@ -71,7 +71,6 @@ GameObject:
   - component: {fileID: 1581996974230550519}
   - component: {fileID: 1581996974230550518}
   - component: {fileID: 1581996974230550517}
-  - component: {fileID: 1581996974230550516}
   - component: {fileID: 1581996974230550515}
   - component: {fileID: 1581996974230550504}
   m_Layer: 0
@@ -90,7 +89,7 @@ Transform:
   m_GameObject: {fileID: 1581996974230550514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 250}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 1581996973290360749}
   - {fileID: 1581996973639239741}
@@ -163,20 +162,41 @@ MonoBehaviour:
     duration: 5
   loop: 1
   minDistanceToPlayer: 200
---- !u!136 &1581996974230550516
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581996974230550514}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 2.6110778
-  m_Height: 20.1844
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  distanceToPlayer: 0
+  evasiveMovements:
+  - type: 1
+    value: 1
+    startTime: 0
+    duration: 1
+  - type: 4
+    value: 3
+    startTime: 1
+    duration: 1
+  - type: 1
+    value: 1
+    startTime: 2
+    duration: 1
+  - type: 4
+    value: -3
+    startTime: 3
+    duration: 1
+  - type: 1
+    value: 1
+    startTime: 4
+    duration: 1
+  - type: 4
+    value: -3
+    startTime: 5
+    duration: 1
+  - type: 1
+    value: 1
+    startTime: 6
+    duration: 2
+  - type: 5
+    value: 1
+    startTime: 8
+    duration: 1
+  takingEvasiveAction: 0
 --- !u!114 &1581996974230550515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,15 +237,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3525218711171095878, guid: 0bb3d2155793bba4d8db8fc565e54ce8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3525218711171095878, guid: 0bb3d2155793bba4d8db8fc565e54ce8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3525218711171095878, guid: 0bb3d2155793bba4d8db8fc565e54ce8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3525218711171095878, guid: 0bb3d2155793bba4d8db8fc565e54ce8, type: 3}
       propertyPath: m_LocalPosition.x
