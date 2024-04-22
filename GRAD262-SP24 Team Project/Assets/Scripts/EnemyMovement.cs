@@ -19,26 +19,30 @@ public class EnemyMovement : ShipMovement
     public Transform player;
     public Movement[] movements;
     public bool loop = false;
+
+    [Header("Evasive Movement")]
     public float minDistanceToPlayer = 100f;
+    public float distanceToPlayer;
+    public Movement[] evasiveMovements;
+    public bool takingEvasiveAction = false;
 
     private float _startTime = 0;
     private float _endTime = 0;
     private Dictionary<MovementType, Movement> _movementsThisFrame = new Dictionary<MovementType, Movement>();
-    public float _startEvasiveMovement = 0;
-    public float _endEvasiveMovement = float.MaxValue;
-    public float _time = 0;
 
     override protected void Start()
     {
         base.Start();
+
         if (!player)
         {
             player = FindObjectOfType<PlayerMovement>().transform;
         }
-        SetMovementStartAndEndTimes();
+
+        SetMovementStartAndEndTimes(movements);
     }
 
-    private void SetMovementStartAndEndTimes()
+    private void SetMovementStartAndEndTimes(Movement[] movements)
     {
         _startTime = Time.time;
 
@@ -48,92 +52,84 @@ public class EnemyMovement : ShipMovement
         }
     }
 
+
     protected void Update()
     {
-        _time = Time.time;
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         _movementsThisFrame.Clear();
 
-       if (TakeEvasiveAction()) 
-        { 
-            EvadePlayer();
-        }
-       else {
-            foreach (Movement movement in movements)
-            {
-                float movementStartTime = _startTime + movement.startTime;
-                float movementEndTime = movementStartTime + movement.duration;
+        Movement[] movementsThisFrame = movements;
 
-                if (Time.time >= movementStartTime && Time.time <= movementEndTime)
+        if (takingEvasiveAction)
+        {
+            if (Time.time > _endTime)
+            {
+                takingEvasiveAction = false;
+                SetMovementStartAndEndTimes(movements);
+            }
+            else
+            {
+                movementsThisFrame = evasiveMovements;
+            }
+        }
+        else
+        {
+            if (TakeEvasiveAction())
+            {
+                takingEvasiveAction = true;
+                movementsThisFrame = evasiveMovements;
+                SetMovementStartAndEndTimes(evasiveMovements);
+            }
+        }
+
+        foreach (Movement movement in movementsThisFrame)
+        {
+            float movementStartTime = _startTime + movement.startTime;
+            float movementEndTime = movementStartTime + movement.duration;
+
+            if (Time.time >= movementStartTime && Time.time <= movementEndTime)
+            {
+                if (_movementsThisFrame.ContainsKey(movement.type))
+                    Debug.LogWarning($"ignoring key {movement.type} overlap, startTime={movement.startTime}");
+                else
                 {
-                    if (_movementsThisFrame.ContainsKey(movement.type))
-                        Debug.LogWarning($"ignoring key {movement.type} overlap, startTime={movement.startTime}");
-                    else
+                    switch (movement.type)
                     {
-                        switch (movement.type)
-                        {
-                            case MovementType.die:
-                                Destroy(gameObject);
-                                break;
-                            case MovementType.restore:
-                                RestoreRotation(movement.value);
-                                break;
-                            case MovementType.thrust:
-                            case MovementType.pitch:
-                            case MovementType.roll:
-                            case MovementType.yaw:
-                                _movementsThisFrame.Add(movement.type, movement);
-                                break;
-                            case MovementType.lookat:
-                                LookAtPlayer(movement.value);
-                                break;
-                            case MovementType.follow:
-                                FollowPlayer(movement.value);
-                                break;
-                            default:
-                                break;
-                        }
+                        case MovementType.die:
+                            Destroy(gameObject);
+                            break;
+                        case MovementType.restore:
+                            RestoreRotation(movement.value);
+                            break;
+                        case MovementType.thrust:
+                        case MovementType.pitch:
+                        case MovementType.roll:
+                        case MovementType.yaw:
+                            _movementsThisFrame.Add(movement.type, movement);
+                            break;
+                        case MovementType.lookat:
+                            LookAtPlayer(movement.value);
+                            break;
+                        case MovementType.follow:
+                            FollowPlayer(movement.value);
+                            break;
+                        default:
+                            break;
                     }
                 }
+            }
 
-                if (Time.time > _endTime && loop)
-                {
-                    SetMovementStartAndEndTimes();
-                }
+            if (!takingEvasiveAction && Time.time > _endTime && loop)
+            {
+                SetMovementStartAndEndTimes(movements);
             }
         }
     }
 
     bool TakeEvasiveAction()
     {
-        float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
-        bool evade = distanceFromPlayer < minDistanceToPlayer && Time.time >= _startEvasiveMovement && Time.time <= _endEvasiveMovement;
-        Debug.Log($"evade={evade}");
-        return evade;
-    }
-
-    private void EvadePlayer()
-    {
-        Movement pitch = new Movement();
-
-        pitch.type = MovementType.pitch;
-        pitch.startTime = Time.time - _startTime;
-        pitch.duration = 5;
-        pitch.value = 100;
-
-        _movementsThisFrame.Add(pitch.type, pitch);
-
-        Movement thrust = new Movement();
-
-        thrust.type = MovementType.thrust;
-        thrust.startTime = Time.time - _startTime;
-        thrust.duration = 5;
-        thrust.value = 100;
-
-        _movementsThisFrame.Add(thrust.type, thrust);
-
-        _startEvasiveMovement = Time.time;
-        _endEvasiveMovement = _startEvasiveMovement + pitch.duration;
+        return distanceToPlayer < minDistanceToPlayer;
     }
 
     private void RestoreRotation(float easing)
