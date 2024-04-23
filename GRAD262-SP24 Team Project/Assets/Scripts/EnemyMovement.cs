@@ -55,7 +55,7 @@ public class EnemyMovement : ShipMovement
 
     protected void Update()
     {
-        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        distanceToPlayer = Mathf.Round(Vector3.Distance(transform.position, player.transform.position));
 
         _movementsThisFrame.Clear();
 
