@@ -29,6 +29,7 @@ public class EnemyMovement : ShipMovement
     private float _startTime = 0;
     private float _endTime = 0;
     private Dictionary<MovementType, Movement> _movementsThisFrame = new Dictionary<MovementType, Movement>();
+    private float _lastDistanceToPlayer = 0;
 
     override protected void Start()
     {
@@ -55,6 +56,7 @@ public class EnemyMovement : ShipMovement
 
     protected void Update()
     {
+        _lastDistanceToPlayer = distanceToPlayer;
         distanceToPlayer = Mathf.Round(Vector3.Distance(transform.position, player.transform.position));
 
         _movementsThisFrame.Clear();
@@ -129,7 +131,7 @@ public class EnemyMovement : ShipMovement
 
     bool TakeEvasiveAction()
     {
-        return evasiveMovements.Length > 0 && distanceToPlayer < minDistanceToPlayer;
+        return evasiveMovements.Length > 0 && distanceToPlayer < minDistanceToPlayer && distanceToPlayer < _lastDistanceToPlayer;
     }
 
     private void RestoreRotation(float easing)
