@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0054663583, g: 0.020004328, b: 0.004607723, a: 1}
+  m_IndirectSpecularColor: {r: 0.0054672165, g: 0.020076044, b: 0.004604739, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -783,6 +783,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2463061073755295652, guid: 534938285ee80c446b8310df0cb94836, type: 3}
+      propertyPath: cooldownTime
+      value: 1000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463061073755295652, guid: 534938285ee80c446b8310df0cb94836, type: 3}
+      propertyPath: proximityDistance
+      value: 82
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463061073755295652, guid: 534938285ee80c446b8310df0cb94836, type: 3}
+      propertyPath: shipWeapons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463061073755295652, guid: 534938285ee80c446b8310df0cb94836, type: 3}
+      propertyPath: shipWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1096094749}
+    - target: {fileID: 2463061073755295673, guid: 534938285ee80c446b8310df0cb94836, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1443833712}
     - target: {fileID: 2463061073755295675, guid: 534938285ee80c446b8310df0cb94836, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -830,6 +850,18 @@ PrefabInstance:
     - target: {fileID: 2463061073755295678, guid: 534938285ee80c446b8310df0cb94836, type: 3}
       propertyPath: m_Name
       value: Roller
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463061073755295678, guid: 534938285ee80c446b8310df0cb94836, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463061073755295679, guid: 534938285ee80c446b8310df0cb94836, type: 3}
+      propertyPath: DamageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f9f7fe8fba74d9041b5cb8e5a548f0f2, type: 3}
+    - target: {fileID: 2463061073755295679, guid: 534938285ee80c446b8310df0cb94836, type: 3}
+      propertyPath: collisionLayers.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 534938285ee80c446b8310df0cb94836, type: 3}
@@ -1609,12 +1641,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1581996974230550504, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
+      propertyPath: shipWeapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581996974230550504, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
+      propertyPath: shipWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1372507059}
+    - target: {fileID: 1581996974230550504, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
+      propertyPath: shipWeapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 625947330}
     - target: {fileID: 1581996974230550514, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
       propertyPath: m_Name
       value: Stalker
       objectReference: {fileID: 0}
     - target: {fileID: 1581996974230550514, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581996974230550517, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
+      propertyPath: minDistanceToPlayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1581996974230550519, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
@@ -1663,6 +1711,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
+--- !u!1 &625947330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3289499339882213062, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
+  m_PrefabInstance: {fileID: 600810734}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &651281454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,6 +1792,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651281454}
   m_CullTransparentMesh: 0
+--- !u!4 &670232730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1103522723718381186, guid: 0daf96c15d4c97b4e9e526f6acfce2f0, type: 3}
+  m_PrefabInstance: {fileID: 2013208463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &670634568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1752,7 +1810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8111698110805180683, guid: bc6c98fc251c2be449e80ebc1aa00bb7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8111698110805180693, guid: bc6c98fc251c2be449e80ebc1aa00bb7, type: 3}
       propertyPath: m_RootOrder
@@ -2730,6 +2788,82 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!21 &989129759
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SingleLine-LightSaber(Clone)
+  m_Shader: {fileID: 4800000, guid: 2d9a4ca4b2730b64e8aade7030f8caeb, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _Glossiness: 0.5
+    - _LightSaberFactor: 0.8
+    - _LineScale: 1
+    - _LineWidth: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _UvBasedLightSaberFactor: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.87058824, g: 0.10334966, b: 0, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1012447841
 GameObject:
   m_ObjectHideFlags: 0
@@ -3090,6 +3224,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1096094749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5929962432248811006, guid: 534938285ee80c446b8310df0cb94836, type: 3}
+  m_PrefabInstance: {fileID: 400722197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1138429171
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,7 +3593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8685332411750118513, guid: ac523a6018a779b48b8d544942fb73bb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac523a6018a779b48b8d544942fb73bb, type: 3}
@@ -3775,6 +3914,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1372507059 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3289499340959790747, guid: 6a8415c421c0d8c4aab4f20790d308c0, type: 3}
+  m_PrefabInstance: {fileID: 600810734}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1391896748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3957,6 +4101,11 @@ CanvasRenderer:
 --- !u!1 &1443833711 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1839288780238724639, guid: dca5ca2d72faf6d4cb95071497504f01, type: 3}
+  m_PrefabInstance: {fileID: 1839288781143980400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1443833712 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1839288780238724608, guid: dca5ca2d72faf6d4cb95071497504f01, type: 3}
   m_PrefabInstance: {fileID: 1839288781143980400}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1494248743
@@ -4874,6 +5023,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldAndSilverAsteroidField
       objectReference: {fileID: 0}
+    - target: {fileID: 7465772935635826828, guid: 578e0c4101a5698479018c04308f3e80, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7465772935635826835, guid: 578e0c4101a5698479018c04308f3e80, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5495,7 +5648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2052085401150693364, guid: 2f7a5da642094cc438fb0de1aa6b48f6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2052085401150693365, guid: 2f7a5da642094cc438fb0de1aa6b48f6, type: 3}
       propertyPath: scaleMax
@@ -5665,6 +5818,82 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!21 &2010537034
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SingleLine-LightSaber(Clone)
+  m_Shader: {fileID: 4800000, guid: 2d9a4ca4b2730b64e8aade7030f8caeb, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _Glossiness: 0.5
+    - _LightSaberFactor: 0.8
+    - _LineScale: 1
+    - _LineWidth: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _UvBasedLightSaberFactor: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.87058824, g: 0.10334966, b: 0, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1001 &2013208463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5836,7 +6065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115b491736bc09b4ba90c6964c0ec5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dockedShipPosition: {fileID: 0}
+  dockedShipPosition: {fileID: 670232730}
   dockingSpeed: 1
   dockingRotationSpeed: 1
 --- !u!114 &2013208467
@@ -6327,7 +6556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3855461590626473522, guid: e9a42be0bfb72fa45b59b8590e820048, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9a42be0bfb72fa45b59b8590e820048, type: 3}

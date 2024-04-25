@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Zach Space.unity
-    guid: 484e88f5379920344bfe86f0bb0b3a02
+    path: Assets/Scenes/Thomas Space.unity
+    guid: 67fd22ce435ac074b86c24ecaf20cac7
   - enabled: 1
     path: Assets/Scenes/Master Space Station.unity
     guid: c83c6c0901350d246ac3c2a750f84670
