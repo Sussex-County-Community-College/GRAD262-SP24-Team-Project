@@ -6,14 +6,14 @@ public class AsteroidMiningParticles : MonoBehaviour
 {
       public ParticleSystem particleEffect;
 
-        private void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Laser"))
         {
-            // Check if the collision is happening with a specific tag, you can customize this as per your requirement
-            if (collision.gameObject.CompareTag("Target"))
-            {
-                // Instantiate the particle effect at the position of the collision
-                Instantiate(particleEffect, collision.contacts[0].point, Quaternion.identity);
-            }
+            // Assuming you have a ParticleSystem component attached to the GameObject
+            GetComponent<ParticleSystem>().Play();
         }
-    
+    }
+
+
 }
