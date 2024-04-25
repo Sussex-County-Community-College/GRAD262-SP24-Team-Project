@@ -6,7 +6,7 @@ public class MySceneManager : Singleton<MySceneManager>
 {
     private void Start()
     {
-        DockingAssist dockingAssist = FindAnyObjectByType<DockingAssist>();
+        DockingAssist dockingAssist = FindObjectOfType<DockingAssist>();
 
         if (dockingAssist)
         {
