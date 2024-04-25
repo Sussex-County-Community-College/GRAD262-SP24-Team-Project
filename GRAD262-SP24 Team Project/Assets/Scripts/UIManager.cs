@@ -17,6 +17,7 @@ public class UIManager : Singleton<UIManager>
     public float laserDebitWhenFiring = 0.1f;
 
     private Dictionary<Laserable.LaserableElements, Slider> _elementSliders = new Dictionary<Laserable.LaserableElements, Slider>();
+    private bool isPaused = false;
 
     private void Start()
     {
@@ -95,32 +96,28 @@ public class UIManager : Singleton<UIManager>
         source.value -= transferAmt;
         destination.value += transferAmt;
     }
-    public class PauseGame
+
+    void Update()
     {
-        private bool isPaused = false;
-
-        void Update()
+        if (Input.GetKeyDown(KeyCode.P)) // Change "P" to any other key if needed
         {
-            if (Input.GetKeyDown(KeyCode.P)) // Change "P" to any other key if needed
-            {
-                TogglePause();
-            }
+            TogglePause();
         }
+    }
 
-        void TogglePause()
+    void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
         {
-            isPaused = !isPaused;
-
-            if (isPaused)
-            {
-                Time.timeScale = 0; // Set the time scale to 0 to pause the game
-                Debug.Log("Game Paused");
-            }
-            else
-            {
-                Time.timeScale = 1; // Set the time scale back to 1 to resume the game
-                Debug.Log("Game Resumed");
-            }
+            Time.timeScale = 0; // Set the time scale to 0 to pause the game
+            Debug.Log("Game Paused");
+        }
+        else
+        {
+            Time.timeScale = 1; // Set the time scale back to 1 to resume the game
+            Debug.Log("Game Resumed");
         }
     }
 }
