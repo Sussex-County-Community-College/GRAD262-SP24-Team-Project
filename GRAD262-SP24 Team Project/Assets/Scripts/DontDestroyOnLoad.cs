@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class DontDestroyOnLoad : MonoBehaviour
 {
     public static SortedSet<string> instantiated = new SortedSet<string>();
-    public bool disableOnSceneChanged = false;
+    public List<int> disableOnScene;
 
     void Awake()
     {
@@ -25,9 +25,13 @@ public class DontDestroyOnLoad : MonoBehaviour
 
     private void OnSceneChanged(Scene current, Scene next)
     {
-        if (disableOnSceneChanged && current.buildIndex >= 0)
+        if (disableOnScene.Contains(next.buildIndex))
         {
-            gameObject.SetActive(!gameObject.activeSelf);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
         }
     }
 }
