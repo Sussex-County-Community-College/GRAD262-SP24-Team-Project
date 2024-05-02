@@ -117,12 +117,56 @@ public class UIManager : Singleton<UIManager>
         if (_isPaused)
         {
             //Time.timeScale = 0; // Set the time scale to 0 to pause the game
-            Debug.Log("Game Paused");
+            Debug.Log("Game Paused, press P to unpasue");
         }
         else
         {
             //Time.timeScale = 1; // Set the time scale back to 1 to resume the game
             Debug.Log("Game Resumed");
+        }
+    }
+    public class Player
+    {
+        private float health;
+
+        public Player(float initialHealth)
+        {
+            health = initialHealth;
+        }
+
+        public void TakeDamage(float damageAmount)
+        {
+            health -= damageAmount;
+            if (health < 0)
+            {
+                health = 0;
+            }
+
+            if (health < 0.25f) // 25% health threshold
+            {
+                FlashLowHealthSign();
+            }
+        }
+
+        private void FlashLowHealthSign()
+        {
+            Console.WriteLine("LOW HEALTH!");
+            // Implement your logic for flashing the low health sign here
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Player player = new Player(100); // Initialize player with 100 health
+
+            // Simulate taking damage
+            player.TakeDamage(30); // Health drops to 70
+            player.TakeDamage(20); // Health drops to 50
+            player.TakeDamage(30); // Health drops to 20, low health sign should flash
+
+            Console.ReadLine(); // Keep console window open
         }
     }
 }
