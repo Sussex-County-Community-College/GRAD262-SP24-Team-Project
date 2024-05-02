@@ -33,12 +33,5 @@ public class PlayerMovement : ShipMovement
         return (Input.mousePosition - _centerOfScreen).y / _centerOfScreen.y;
     }
 
-    virtual protected void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P)) {
-            paused = !paused;
-        }
-    }
-
 }
 

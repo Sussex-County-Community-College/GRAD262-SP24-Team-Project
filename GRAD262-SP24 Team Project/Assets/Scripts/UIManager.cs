@@ -17,7 +17,8 @@ public class UIManager : Singleton<UIManager>
     public float laserDebitWhenFiring = 0.1f;
 
     private Dictionary<Laserable.LaserableElements, Slider> _elementSliders = new Dictionary<Laserable.LaserableElements, Slider>();
-    private bool isPaused = false;
+    private bool _isPaused = false;
+    private PlayerMovement _playerMovement;
 
     private void Start()
     {
@@ -34,6 +35,9 @@ public class UIManager : Singleton<UIManager>
         _elementSliders.Add(Laserable.LaserableElements.Titanium, titanium);
 
         FindObjectOfType<DockingAssist>().onDockingStateChange.AddListener(OnDockingStateChange);
+
+        _playerMovement = FindObjectOfType<PlayerMovement>();
+        _isPaused = _playerMovement.paused;
     }
 
     private void OnDockingStateChange(DockingAssist.DockingState dockingState)
@@ -107,16 +111,17 @@ public class UIManager : Singleton<UIManager>
 
     void TogglePause()
     {
-        isPaused = !isPaused;
+        _isPaused = !_isPaused;
+        _playerMovement.paused = _isPaused;
 
-        if (isPaused)
+        if (_isPaused)
         {
-            Time.timeScale = 0; // Set the time scale to 0 to pause the game
+            //Time.timeScale = 0; // Set the time scale to 0 to pause the game
             Debug.Log("Game Paused");
         }
         else
         {
-            Time.timeScale = 1; // Set the time scale back to 1 to resume the game
+            //Time.timeScale = 1; // Set the time scale back to 1 to resume the game
             Debug.Log("Game Resumed");
         }
     }
