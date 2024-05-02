@@ -9,33 +9,24 @@ public class EnemyWeapons : ShipWeapons
     private float lastFireTime;
     private int fireCount;
     private int maxFireCount = 5;
+    private bool isFiring;
+   
 
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         lastFireTime = -cooldownTime;
         fireCount = 0;
+        isFiring = false;
     }
     protected override bool Fire()
-    { if (Vector3.Distance(transform.position,playerTransform.position) < proximityDistance)
+    {  
+        // Before firing two strategies:
+        // 1. Make sure enemy is approaching the player.
+        // 2. Use a Raycast forward from the enemy to the player and fire if raycast hits.
+        if (!isFiring && Vector3.Distance(transform.position,playerTransform.position) < proximityDistance)
         {
-            Debug.Log("Enemy is in range to fire!");
-            //Rotate the enemy towards the player
-            Vector3 targetDirection = playerTransform.position - transform.position;
-            float step= rotationSpeed * Time.deltaTime;
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, step, 0.0f);
-            transform.rotation = Quaternion.LookRotation(newDirection);
-
-            //Check if enough time has passed since the last shot
-            if (Time.time - lastFireTime >= cooldownTime && fireCount < maxFireCount)
-            {
-                Debug.Log("Firing missile");
-                //Fire a missile
-                WeaponFired();
-                lastFireTime = Time.time; //Update the last fire time
-                fireCount++;
-            }
-            
+            isFiring = true;
             return true;
         }
         return false;
@@ -43,18 +34,91 @@ public class EnemyWeapons : ShipWeapons
 
     protected override void WeaponFired()
     {
+        Invoke("EnableFiring", cooldownTime);
+        fireCount++;
+        /*
         foreach (GameObject weapon in shipWeapons)
         {
-            GameObject missile = Instantiate(missilePrefab, weapon.transform.position, weapon.transform.rotation);
+            Vector3 targetDirection = (playerTransform.position - weapon.transform.position).normalized;
+
+            Quaternion rotationToPlayer = Quaternion.LookRotation(targetDirection);
+
+            GameObject missile = Instantiate(missilePrefab, weapon.transform.position,rotationToPlayer);
+           
             Rigidbody missileRigidbody = missile.GetComponent<Rigidbody>();
-            missileRigidbody.AddForce(weapon.transform.forward * missileForce * Time.fixedDeltaTime); 
+  
+            missileRigidbody.AddForce(targetDirection * missileForce * Time.fixedDeltaTime);
+
+            
+
+            
+          
+            
+
         }
+        fireCount++;
+        if (fireCount >= maxFireCount)
+        {
+            fireCount = 0;
+            lastFireTime = Time.time;
+            isFiring = false;
+        }
+        */
+    }
+
+    private void EnableFiring()
+    {
+        isFiring = false;
     }
 
     protected override int WeaponsLeft()
     {
-        return int.MaxValue;
+        int remainingWeapons = Mathf.Max(maxFireCount - fireCount, 0);
+        if (remainingWeapons == 0 && fireCount > 0)
+        {
+            Invoke("Reload", cooldownTime);
+        }
+        return remainingWeapons;
     }
+
+    private void Reload()
+    {
+        fireCount = 0;
+    }
+
+    /*
+     void Update()
+    {
+        if (Fire())
+            FireWeapon();
+    }
+
+    private void FireWeapon()
+    {
+        Debug.Log("Enemy is firing weapon!");
+        if (shipWeapons != null && shipWeapons.Length > 0)
+        {
+            if (WeaponsLeft() > 0)
+            {
+                GameObject weapon = shipWeapons[Random.Range(0, shipWeapons.Length)];
+                if (weapon != null)
+                {
+                    GameObject missile = Instantiate(missilePrefab, weapon.transform.position, weapon.transform.rotation);
+                    Rigidbody missileRigidbody = missile.GetComponent<Rigidbody>();
+                    if (missileRigidbody)
+                    {
+                        missileRigidbody.velocity = GetComponent<Rigidbody>().velocity;
+
+                        missileRigidbody.AddForce(transform.forward * missileForce * Time.fixedDeltaTime);
+                    }
+                }
+                WeaponFired();
+                lastFireTime = Time.time;
+                isFiring = true;
+            }
+        }
+    }
+    */
 }
 
 
