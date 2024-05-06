@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856ec5b281bd14c45ae2854b2a75aca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 100
+  spawnCount: 10
   spawnRangeMax: {x: 500, y: 500, z: 500}
   spawnRangeMin: {x: -500, y: -500, z: -500}
   scaleMax: 50

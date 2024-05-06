@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856ec5b281bd14c45ae2854b2a75aca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 40
+  spawnCount: 15
   spawnRangeMax: {x: 512, y: 0, z: 512}
   spawnRangeMin: {x: -512, y: 0, z: -512}
   scaleMax: 80
@@ -66,5 +66,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingDistanceFromPlayer: 2000
-  endingDistanceFromPlayer: 4000
+  endingDistanceFromPlayer: 10000
   force: 3
