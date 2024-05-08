@@ -10,6 +10,7 @@ TagManager:
   - Waypoint
   - DockingPort
   - Laser
+  - Missle
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Asteroids
   - Space Station
   - Laser
-  - 
+  - Enemy
   - 
   - 
   - 

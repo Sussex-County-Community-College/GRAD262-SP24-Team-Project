@@ -20,7 +20,6 @@ abstract public class ShipWeapons : MonoBehaviour
 
     private void FireWeapon()
     {
-        Debug.Log("Enemy is firing weapon!");
         if (shipWeapons != null && shipWeapons.Length > 0)
         {
             if (WeaponsLeft() > 0)

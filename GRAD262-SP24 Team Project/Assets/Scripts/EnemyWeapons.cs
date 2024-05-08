@@ -22,7 +22,7 @@ public class EnemyWeapons : ShipWeapons
 
         int layerMask = LayerMask.GetMask("Player");
         RaycastHit hit;
-       
+
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, proximityDistance, layerMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);

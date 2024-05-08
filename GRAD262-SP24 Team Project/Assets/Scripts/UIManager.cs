@@ -38,6 +38,24 @@ public class UIManager : Singleton<UIManager>
 
         _playerMovement = FindObjectOfType<PlayerMovement>();
         _isPaused = _playerMovement.paused;
+
+        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
+        playerHealth.onTakeDamage.AddListener(OnPlayerHealthChange);
+    }
+
+    private void OnPlayerHealthChange(float health)
+    {
+        if (health < 3) // 3/10 health threshold
+        {
+            FlashLowHealthSign();
+        }
+
+        playerHealth.value = health;
+    }
+
+    private void FlashLowHealthSign()
+    {
+        Log("FlashLowHealthSign");
     }
 
     private void OnDockingStateChange(DockingAssist.DockingState dockingState)
@@ -73,11 +91,6 @@ public class UIManager : Singleton<UIManager>
     public void AsteroidBlast()
     {
         asteroidHits.value++;
-    }
-
-    public void ShipHealth()
-    {
-        playerHealth.value--;
     }
 
     private void ElementLasered(Laserable.LaserableElements element, float amount)

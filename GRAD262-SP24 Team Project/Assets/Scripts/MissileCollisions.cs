@@ -21,18 +21,22 @@ public class MissileCollisions : MonoBehaviour
     {
         if (collisionLayers == (collisionLayers | (1 << collision.gameObject.layer)))
         {
+            Destroy(gameObject);
+
             if (collision.gameObject.CompareTag("Asteroid"))
             {
                 Debug.Log("Missle hit Asteroid!");
                 UIManager.Instance.AsteroidBlast();
-                Destroy(gameObject);
                 Destroy(collision.gameObject);
             }
             else if (collision.gameObject.CompareTag("Enemy"))
             {
                 Debug.Log("Missle hit Enemy!");
-                Destroy(gameObject);
                 Destroy(collision.gameObject);
+            }
+            else if (collision.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Missle hit Player!");
             }
         }
         
